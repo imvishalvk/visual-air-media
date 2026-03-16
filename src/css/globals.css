@@ -1,0 +1,223 @@
+/* ============================================================
+   VISUAL AIR MEDIA — CSS Variables & Global Styles
+   🎨 Edit colors here to retheme the whole site instantly
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Color Variables (from Propelo palette) ─────────────── */
+:root {
+  --bg-primary:    #0D0B14;
+  --bg-card:       #1A1525;
+  --bg-surface:    #16121F;
+  --accent-pink:   #E91E8C;
+  --accent-light:  #F472B6;
+  --accent-glow:   rgba(233, 30, 140, 0.15);
+  --text-primary:  #FFFFFF;
+  --text-muted:    #B0A8C4;
+  --text-subtle:   #7B7090;
+  --border:        #2E2540;
+  --border-hover:  rgba(233, 30, 140, 0.4);
+  --gradient-pink: linear-gradient(135deg, #E91E8C 0%, #F472B6 100%);
+  --gradient-dark: linear-gradient(180deg, #0D0B14 0%, #1A1525 100%);
+  --shadow-pink:   0 0 40px rgba(233, 30, 140, 0.2);
+  --shadow-card:   0 4px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Base Reset ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 2px; }
+
+/* ── Selection ───────────────────────────────────────────── */
+::selection { background: var(--accent-pink); color: #fff; }
+
+/* ── Focus ───────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent-pink); outline-offset: 3px; }
+
+/* ── Utility Classes ─────────────────────────────────────── */
+.text-gradient {
+  background: var(--gradient-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* No display property — let the element's natural display apply */
+  /* Using inline-block on block elements causes the pink bg box bug */
+}
+
+/* Card — fixed proportions, no stretching */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;            /* fill grid cell, never overflow */
+}
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-pink);
+  transform: translateY(-4px);
+}
+
+/* Buttons — inline, never full-width unless told to */
+.btn-primary {
+  background: var(--gradient-pink);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(233, 30, 140, 0.4);
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  padding: 11px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+.btn-outline:hover {
+  border-color: var(--accent-pink);
+  color: var(--accent-pink);
+  transform: translateY(-2px);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-pink);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ── Noise grain overlay ─────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Glow blobs ──────────────────────────────────────────── */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+/* ── Portfolio card overlay ──────────────────────────────── */
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.portfolio-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,11,20,0.95) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.portfolio-card:hover .overlay { opacity: 1; }
+.portfolio-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.portfolio-card:hover img { transform: scale(1.06); }
+
+/* ── Form inputs ─────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.form-input::placeholder { color: var(--text-subtle); }
+.form-input:focus {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 3px rgba(233,30,140,0.15);
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Page transition ─────────────────────────────────────── */
+.page-enter { opacity: 0; transform: translateY(20px); }
+.page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.5s ease; }
