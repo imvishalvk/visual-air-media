@@ -95,7 +95,7 @@ export default function PortfolioGallery({ title, description, items }) {
   const filtered = filter === "All" ? items : items.filter(i => i.tags.includes(filter));
 
   return (
-    <div className="min-h-screen pt-28 pb-24 px-6" style={{ background: "var(--bg-primary)" }}>
+    <div id="" className="min-h-screen pt-28 pb-24 px-6" style={{ background: "var(--bg-primary)" }}>
       {/* Page header */}
       <motion.div
         ref={ref}
@@ -103,7 +103,7 @@ export default function PortfolioGallery({ title, description, items }) {
         custom={0}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto text-center mb-14"
+        className="max-w-5xl mx-auto text-center mb-14"
       >
         <span className="section-label">Portfolio</span>
         <h1 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
@@ -134,7 +134,7 @@ export default function PortfolioGallery({ title, description, items }) {
       </motion.div>
 
       {/* Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <AnimatePresence mode="wait">
           {filtered.map((item, i) => (
             <PortfolioCard key={item.id} item={item} index={i} onClick={setSelected} />

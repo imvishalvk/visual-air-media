@@ -221,3 +221,34 @@ h1, h2, h3, h4 {
 /* ── Page transition ─────────────────────────────────────── */
 .page-enter { opacity: 0; transform: translateY(20px); }
 .page-enter-active { opacity: 1; transform: translateY(0); transition: all 0.5s ease; }
+
+/* ── RESPONSIVE OVERFLOW FIX ────────────────────────────── */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  min-width: 0;          /* prevents flex children from overflowing */
+}
+
+/* All sections full width, no overflow */
+section {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* All content containers centered and capped */
+.max-w-5xl,
+.max-w-7xl,
+.max-w-4xl,
+.max-w-3xl,
+.max-w-2xl,
+.max-w-xl {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

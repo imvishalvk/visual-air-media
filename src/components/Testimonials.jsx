@@ -17,7 +17,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-28 px-6" style={{ background: "var(--bg-surface)" }}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           ref={ref}
           variants={fadeUp}

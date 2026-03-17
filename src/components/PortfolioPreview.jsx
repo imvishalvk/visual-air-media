@@ -40,7 +40,7 @@ export default function PortfolioPreview() {
         </motion.div>
 
         {/* 2-column grid */}
-        <div className="flex gap-5">
+        <div className="flex flex-col lg:flex-row gap-5">
           {SERVICES.map((service, i) => {
             const items = PORTFOLIO[service.id]?.items.slice(0, 3) || [];
             return (
@@ -95,7 +95,7 @@ export default function PortfolioPreview() {
                   </p>
                   <Link
                     to={service.portfolioPath}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase transition-colors duration-200"
+                    className="lg:inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase transition-colors duration-200"
                     style={{ color: "var(--accent-pink)" }}
                   >
                     View All Projects →

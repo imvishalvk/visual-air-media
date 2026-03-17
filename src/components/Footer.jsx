@@ -4,7 +4,7 @@ import { COMPANY, NAV_LINKS, FOOTER, SERVICES } from "../content/siteContent";
 export default function Footer() {
   return (
     <footer className="border-t py-16 px-6" style={{ background: "var(--bg-primary)", borderColor: "var(--border)" }}>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">

@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { HERO } from "../content/siteContent";
 
-const serviceMarquee = ["Long Form Videos", "Short Form Videos", "Motion Graphics", "UI/UX Development"];
+const serviceMarquee = ["Long Form Videos", "Short Form Videos", "UI/UX Development"];
 
 export default function Hero() {
   const ref = useRef(null);
@@ -107,8 +107,25 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.56 }}
           className="flex flex-wrap gap-3 justify-center mb-16"
         >
-          <a href={HERO.cta1.href} className="btn-primary">{HERO.cta1.label} →</a>
-          <a href={HERO.cta2.href} className="btn-outline">{HERO.cta2.label}</a>
+          <button
+  className="btn-primary"
+  onClick={() => {
+    const el = document.getElementById("portfolio");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  {HERO.cta1.label} →
+</button>
+
+<button
+  className="btn-outline"
+  onClick={() => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  {HERO.cta2.label}
+</button>
         </motion.div>
 
         {/* Stats */}
@@ -151,7 +168,7 @@ export default function Hero() {
           {[...serviceMarquee, ...serviceMarquee, ...serviceMarquee, ...serviceMarquee].map((s, i) => (
             <span key={i} className="text-xs font-bold tracking-widest uppercase px-8 whitespace-nowrap"
               style={{ color: "var(--text-subtle)" }}>
-              ✦ {s}
+               {s}
             </span>
           ))}
         </div>

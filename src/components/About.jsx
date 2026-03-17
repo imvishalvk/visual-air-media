@@ -19,7 +19,7 @@ export default function About() {
         className="glow-blob w-[500px] h-[500px] right-[-150px] top-0"
         style={{ background: "rgba(233,30,140,0.06)", y: blobY }} />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Title */}
         <motion.div
           ref={titleRef}

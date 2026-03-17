@@ -23,12 +23,12 @@ function ServiceCard({ service, index }) {
       custom={index * 0.08}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="group relative overflow-hidden rounded-2xl border p-6 flex flex-col"
+      className="group h-[380px] lg:w-[400px] relative overflow-hidden rounded-2xl border p-6 flex flex-col"
       style={{
         background: "var(--bg-card)",
         borderColor: "var(--border)",
-        minHeight: "380px",         /* consistent card height */
-        width:"400px",
+        // minHeight: "380px",         /* consistent card height */
+        // width:"400px",
         transition: "border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
       }}
       onMouseEnter={e => {
@@ -112,7 +112,7 @@ export default function Services() {
   const { ref, isInView } = useScrollAnimation();
 
   return (
-    <section id="services" className="py-24 px-6" style={{ background: "var(--bg-surface)" }}>
+    <section id="services" className="py-24 px-6 " style={{ background: "var(--bg-surface)" }}>
       {/* Title */}
       <motion.div
         ref={ref}
@@ -143,7 +143,7 @@ export default function Services() {
       </motion.div>
 
       {/* 2-column grid — fixed gap, no overflow */}
-      <div className="max-w-5xl mx-auto flex gap-5" id="services">
+      <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-5" id="services">
         {SERVICES.map((service, i) => (
           <ServiceCard key={service.id} service={service} index={i} />
         ))}
