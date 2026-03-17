@@ -6,6 +6,7 @@ import { NAV_LINKS } from "../content/siteContent";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -15,12 +16,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   useEffect(() => setMenuOpen(false), [location]);
 
   const handleNavClick = (href) => {
     setMenuOpen(false);
 
-    // If clicking "Home"
     if (href === "/") {
       navigate("/");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -29,23 +35,17 @@ export default function Navbar() {
 
     const sectionId = href.replace("#", "");
 
-    // If already on home page — just scroll
     if (location.pathname === "/" || location.pathname === "") {
       const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
 
-    // If on a different page (portfolio etc.) — go home first, then scroll
     navigate("/");
     setTimeout(() => {
       const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 600); // wait for page transition to complete
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 600);
   };
 
   return (
@@ -58,33 +58,32 @@ export default function Navbar() {
         top: 0, left: 0, right: 0,
         zIndex: 50,
         width: "100%",
-        transition: "background 0.3s ease, border 0.3s ease",
         background: scrolled ? "rgba(13,11,20,0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled
           ? "1px solid var(--border)"
           : "1px solid transparent",
+        transition: "background 0.3s ease, border 0.3s ease",
       }}
     >
-      {/* Inner container — matches all section widths */}
-      <div
-        style={{
-          maxWidth: 960,
-          margin: "0 auto",
-          padding: "14px 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
+      {/* ── Top bar ─────────────────────────────────────── */}
+      <div style={{
+        maxWidth: 960,
+        margin: "0 auto",
+        padding: "14px 24px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 16,
+      }}>
+
         {/* Logo */}
         <button
           onClick={() => handleNavClick("/")}
           style={{
             background: "none", border: "none", cursor: "pointer",
-            display: "flex", alignItems: "center", gap: 10, padding: 0,
-            flexShrink: 0,
+            display: "flex", alignItems: "center", gap: 10,
+            padding: 0, flexShrink: 0,
           }}
         >
           <div style={{
@@ -105,84 +104,83 @@ export default function Navbar() {
           </span>
         </button>
 
-        {/* Desktop Nav Links */}
-        <nav
-          style={{
-            display: "flex", alignItems: "center", gap: 24,
-          }}
-          className="hidden lg:flex"
-        >
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => handleNavClick(link.href)}
-              style={{
-                background: "none", border: "none", cursor: "pointer",
-                color: "var(--text-muted)", fontSize: 13,
-                fontWeight: 500, fontFamily: "Poppins, sans-serif",
-                whiteSpace: "nowrap", padding: 0,
-                transition: "color 0.2s ease",
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = "var(--accent-pink)"}
-              onMouseLeave={e => e.currentTarget.style.color = "var(--text-muted)"}
-            >
-              {link.label}
-            </button>
-          ))}
-        </nav>
+        {/* Desktop Nav — only when NOT mobile */}
+        {!isMobile && (
+          <nav style={{ display: "flex", alignItems: "center", gap: 24 }}>
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link.href)}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  color: "var(--text-muted)", fontSize: 13,
+                  fontWeight: 500, fontFamily: "Poppins, sans-serif",
+                  whiteSpace: "nowrap", padding: 0,
+                  transition: "color 0.2s ease",
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = "var(--accent-pink)"}
+                onMouseLeave={e => e.currentTarget.style.color = "var(--text-muted)"}
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+        )}
 
-        {/* CTA Button */}
-        <button
-          onClick={() => handleNavClick("#contact")}
-          className="hidden lg:block"
-          style={{
-            background: "var(--gradient-pink)", color: "#fff",
-            padding: "9px 20px", borderRadius: 50, border: "none",
-            fontSize: 13, fontWeight: 700,
-            fontFamily: "Poppins, sans-serif",
-            cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0,
-          }}
-        >
-          Get a Quote ↗
-        </button>
+        {/* Desktop CTA — only when NOT mobile */}
+        {!isMobile && (
+          <button
+            onClick={() => handleNavClick("#contact")}
+            style={{
+              background: "var(--gradient-pink)", color: "#fff",
+              padding: "9px 20px", borderRadius: 50, border: "none",
+              fontSize: 13, fontWeight: 700,
+              fontFamily: "Poppins, sans-serif",
+              cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0,
+            }}
+          >
+            Get a Quote ↗
+          </button>
+        )}
 
-        {/* Hamburger — mobile only */}
-        <button
-          className="lg:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: "none", border: "none",
-            cursor: "pointer", padding: 4, flexShrink: 0,
-          }}
-          aria-label="Toggle menu"
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-            <span style={{
-              display: "block", width: 24, height: 2, background: "#fff",
-              transition: "all 0.3s",
-              transform: menuOpen
-                ? "rotate(45deg) translate(5px, 5px)"
-                : "none",
-            }} />
-            <span style={{
-              display: "block", width: 24, height: 2, background: "#fff",
-              transition: "all 0.3s",
-              opacity: menuOpen ? 0 : 1,
-            }} />
-            <span style={{
-              display: "block", width: 24, height: 2, background: "#fff",
-              transition: "all 0.3s",
-              transform: menuOpen
-                ? "rotate(-45deg) translate(5px, -5px)"
-                : "none",
-            }} />
-          </div>
-        </button>
+        {/* Hamburger — only when mobile */}
+        {isMobile && (
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none", border: "none",
+              cursor: "pointer", padding: 4, flexShrink: 0,
+            }}
+            aria-label="Toggle menu"
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+              <span style={{
+                display: "block", width: 24, height: 2, background: "#fff",
+                transition: "all 0.3s",
+                transform: menuOpen
+                  ? "rotate(45deg) translate(5px, 5px)"
+                  : "none",
+              }} />
+              <span style={{
+                display: "block", width: 24, height: 2, background: "#fff",
+                transition: "all 0.3s",
+                opacity: menuOpen ? 0 : 1,
+              }} />
+              <span style={{
+                display: "block", width: 24, height: 2, background: "#fff",
+                transition: "all 0.3s",
+                transform: menuOpen
+                  ? "rotate(-45deg) translate(5px, -5px)"
+                  : "none",
+              }} />
+            </div>
+          </button>
+        )}
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile dropdown menu ─────────────────────────── */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && isMobile && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -195,9 +193,12 @@ export default function Navbar() {
             }}
           >
             <div style={{
-              maxWidth: 960, margin: "0 auto",
+              maxWidth: 960,
+              margin: "0 auto",
               padding: "20px 24px",
-              display: "flex", flexDirection: "column", gap: 16,
+              display: "flex",
+              flexDirection: "column",
+              gap: 18,
             }}>
               {NAV_LINKS.map((link) => (
                 <button
@@ -205,7 +206,8 @@ export default function Navbar() {
                   onClick={() => handleNavClick(link.href)}
                   style={{
                     background: "none", border: "none",
-                    cursor: "pointer", padding: 0, textAlign: "left",
+                    cursor: "pointer", padding: 0,
+                    textAlign: "left",
                     color: "var(--text-muted)", fontSize: 15,
                     fontWeight: 500, fontFamily: "Poppins, sans-serif",
                   }}
