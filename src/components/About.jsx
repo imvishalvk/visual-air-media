@@ -48,7 +48,15 @@ export default function About() {
           >
             <p className="text-base leading-relaxed mb-5" style={{ color: "var(--text-muted)" }}>{ABOUT.paragraph1}</p>
             <p className="text-base leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>{ABOUT.paragraph2}</p>
-            <a href="#contact" className="btn-primary text-sm">Work With Us ↗</a>
+            <button
+              className="btn-primary"
+              onClick={() => {
+                const el = document.getElementById("contact");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
+              Work With Us ↗
+            </button>
 
             {/* Visual accent bar */}
             <div className="mt-10 h-1 w-32 rounded-full" style={{ background: "var(--gradient-pink)" }} />
