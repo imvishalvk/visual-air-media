@@ -67,7 +67,7 @@ export default function PortfolioPreview() {
                 }}
               >
                 {/* Image thumbnails row — fixed height */}
-                <div className="grid grid-cols-3 gap-1 p-2.5" style={{ height: "250px" }}>
+                <Link to={service.portfolioPath} className="grid grid-cols-3 gap-1 p-2.5" style={{ height: "250px" }}>
                   {items.map(item => (
                     <div key={item.id} className="rounded-lg overflow-hidden h-full">
                       <img
@@ -77,7 +77,7 @@ export default function PortfolioPreview() {
                       />
                     </div>
                   ))}
-                </div>
+                </Link>
 
                 {/* Card body */}
                 <div className="px-5 pb-5 pt-3">

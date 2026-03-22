@@ -15,7 +15,7 @@ export default function Hero() {
     <section
       ref={ref}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ paddingTop: "80px" }}
+      style={{ paddingTop: "20px" }}
     >
       {/* Background blobs */}
       <motion.div
@@ -165,7 +165,7 @@ export default function Hero() {
         style={{ borderColor: "var(--border)" }}
       >
         <div className="marquee-track">
-          {[...serviceMarquee, ...serviceMarquee, ...serviceMarquee, ...serviceMarquee].map((s, i) => (
+          {[...serviceMarquee, ...serviceMarquee, ...serviceMarquee, ...serviceMarquee, ...serviceMarquee, ...serviceMarquee].map((s, i) => (
             <span key={i} className="text-xs font-bold tracking-widest uppercase px-8 whitespace-nowrap"
               style={{ color: "var(--text-subtle)" }}>
                {s}

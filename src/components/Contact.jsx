@@ -1,8 +1,12 @@
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { COMPANY, CONTACT, EMAILJS_CONFIG } from "../content/siteContent";
 import { useScrollAnimation, fadeLeft, fadeRight } from "../hooks/useScrollAnimation";
+import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
+
 
 export default function Contact() {
   const formRef = useRef(null);
@@ -10,6 +14,10 @@ export default function Contact() {
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const { ref: leftRef, isInView: leftInView } = useScrollAnimation();
   const { ref: rightRef, isInView: rightInView } = useScrollAnimation();
+  const { ref, isInView } = useScrollAnimation();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y1      = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const y2      = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   const handleChange = (e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -33,6 +41,25 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-28 px-6 relative" style={{ background: "var(--bg-surface)" }}>
+
+      {/* Background blobs */}
+      <motion.div
+        style={{
+          position: "absolute", top: 0, left: 0,
+          width: 500, height: 500, borderRadius: "50%",
+          background: "var(--accent-glow)", filter: "blur(120px)",
+          pointerEvents: "none", y: y1,
+        }}
+      />
+      <motion.div
+        style={{
+          position: "absolute", bottom: 0, right: -60,
+          width: 360, height: 360, borderRadius: "50%",
+          background: "rgba(244,114,182,0.07)", filter: "blur(100px)",
+          pointerEvents: "none", y: y2,
+        }}
+      />
+
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -84,10 +111,10 @@ export default function Contact() {
               <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "var(--text-subtle)" }}>Follow Us</p>
               <div className="flex gap-3">
                 {[
-                  { label: "Instagram", href: COMPANY.instagram, icon: "📸" },
-                  { label: "LinkedIn", href: COMPANY.linkedin, icon: "💼" },
-                  { label: "YouTube", href: COMPANY.youtube, icon: "▶️" },
-                  { label: "Twitter", href: COMPANY.twitter, icon: "🐦" },
+                  { label: "Instagram", href: COMPANY.instagram, icon: <FaInstagram className="text-4xl py-1.5 text-[#E4405F]"/> },
+                  { label: "LinkedIn", href: COMPANY.linkedin, icon: <FaLinkedin className="text-4xl py-1.5 text-[#0A66C2]"/> },
+                  { label: "YouTube", href: COMPANY.youtube, icon: <FaYoutube className="text-4xl py-1.5 text-[#FF0000]"/>},
+                  { label: "Twitter", href: COMPANY.twitter, icon: <FaXTwitter className="text-4xl py-1.5 text-black "/> },
                 ].map((s) => (
                   <a
                     key={s.label}

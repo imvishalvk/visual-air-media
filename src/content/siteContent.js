@@ -12,7 +12,7 @@ export const COMPANY = {
     "We craft stunning visual experiences — from cinematic long-form edits to viral short-form content, breathtaking motion graphics, and polished UI/UX designs that convert.",
   email: "hello@visualairmedia.com",
   phone: "+91 98765 43210",
-  location: "Bengaluru, Karnataka, India",
+  location: "Jamshedpur, Jharkhand, India",
   instagram: "https://instagram.com/visualairmedia",
   linkedin: "https://linkedin.com/company/visualairmedia",
   youtube: "https://youtube.com/@visualairmedia",
@@ -54,7 +54,7 @@ export const SERVICES = [
     subtitle: "Cinematic storytelling",
     description:
       "Documentary-grade edits, brand films, interview series, and YouTube long-form content that captivates and retains viewers till the very end.",
-    tags: ["Brand Films", "Documentaries", "YouTube Series", "Corporate Videos"],
+    tags: ["Brand Films", "Documentaries", "Podcast", "After Movie"],
     portfolioPath: "/portfolio/longform",
     color: "pink",
   },
@@ -99,24 +99,24 @@ export const PORTFOLIO = {
     title: "Long Form Videos",
     description: "Cinematic brand films, documentaries & YouTube series",
     items: [
-      { id: 1, title: "Brand Documentary – TechCorp", category: "Documentary", duration: "12 min", thumbnail: "https://picsum.photos/seed/lf1/600/400", tags: ["Documentary", "Corporate"] },
-      { id: 2, title: "YouTube Series – The Build", category: "YouTube Series", duration: "28 min", thumbnail: "https://picsum.photos/seed/lf2/600/400", tags: ["YouTube", "Series"] },
-      { id: 3, title: "Product Launch Film – NovaTech", category: "Brand Film", duration: "5 min", thumbnail: "https://picsum.photos/seed/lf3/600/400", tags: ["Brand Film", "Product"] },
-      { id: 4, title: "Corporate Annual Report", category: "Corporate", duration: "8 min", thumbnail: "https://picsum.photos/seed/lf4/600/400", tags: ["Corporate", "Annual"] },
-      { id: 5, title: "Startup Story – FinEdge", category: "Documentary", duration: "15 min", thumbnail: "https://picsum.photos/seed/lf5/600/400", tags: ["Startup", "Story"] },
-      { id: 6, title: "Event Highlight – Summit 2024", category: "Event", duration: "6 min", thumbnail: "https://picsum.photos/seed/lf6/600/400", tags: ["Event", "Summit"] },
+      { id: 1, title: "Brand Documentary – TechCorp", category: "Documentary", duration: "12 min", thumbnail: "https://picsum.photos/seed/lf1/600/400", tags: ["Documentary", "After Movie"] },
+      { id: 2, title: "YouTube Series – The Build", category: "YouTube Series", duration: "28 min", thumbnail: "https://picsum.photos/seed/lf2/600/400", tags: ["Podcast"] },
+      { id: 3, title: "Product Launch Film – NovaTech", category: "Brand Film", duration: "5 min", thumbnail: "https://picsum.photos/seed/lf3/600/400", tags: ["After Movie"] },
+      { id: 4, title: "Corporate Annual Report", category: "Documentary", duration: "8 min", thumbnail: "https://picsum.photos/seed/lf4/600/400", tags: ["Documentary", "Podcast"] },
+      { id: 5, title: "Startup Story – FinEdge", category: "Documentary", duration: "15 min", thumbnail: "https://picsum.photos/seed/lf5/600/400", tags: ["After Movie", "Podcast"] },
+      { id: 6, title: "Event Highlight – Summit 2024", category: "Event", duration: "6 min", thumbnail: "https://picsum.photos/seed/lf6/600/400", tags: ["Documentary", "After Movie"] },
     ],
   },
   shortform: {
     title: "Short Form Videos",
     description: "Viral Reels, Shorts & social-first content",
     items: [
-      { id: 1, title: "Product Reel – AirFlow", category: "Instagram Reel", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf1/600/400", tags: ["Reel", "Product"] },
-      { id: 2, title: "Brand Story – 60s Cut", category: "Brand", duration: "60 sec", thumbnail: "https://picsum.photos/seed/sf2/600/400", tags: ["Brand", "Story"] },
-      { id: 3, title: "Tutorial Short – Design Tips", category: "YouTube Short", duration: "45 sec", thumbnail: "https://picsum.photos/seed/sf3/600/400", tags: ["Tutorial", "YouTube"] },
-      { id: 4, title: "Event Teaser – TechFest", category: "Teaser", duration: "15 sec", thumbnail: "https://picsum.photos/seed/sf4/600/400", tags: ["Event", "Teaser"] },
-      { id: 5, title: "Ad Cut – SneakerDrop", category: "Ad", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf5/600/400", tags: ["Ad", "Product"] },
-      { id: 6, title: "TikTok Series – Day in Life", category: "TikTok", duration: "55 sec", thumbnail: "https://picsum.photos/seed/sf6/600/400", tags: ["TikTok", "Series"] },
+      { id: 1, title: "Product Reel – AirFlow", category: "Motion graphics", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf1/600/400", tags: ["Motion graphics", "Promotional videos"] },
+      { id: 2, title: "Brand Story – 60s Cut", category: "Brand", duration: "60 sec", thumbnail: "https://picsum.photos/seed/sf2/600/400", tags: ["Motion graphics", "Podcast clips"] },
+      { id: 3, title: "Tutorial Short – Design Tips", category: "YouTube Short", duration: "45 sec", thumbnail: "https://picsum.photos/seed/sf3/600/400", tags: ["Promotional videos", "YouTube"] },
+      { id: 4, title: "Event Teaser – TechFest", category: "Teaser", duration: "15 sec", thumbnail: "https://picsum.photos/seed/sf4/600/400", tags: ["Promotional videos", "Real estate"] },
+      { id: 5, title: "Ad Cut – SneakerDrop", category: "Ads", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf5/600/400", tags: ["Ads", "Real estate"] },
+      { id: 6, title: "TikTok Series – Day in Life", category: "Ads", duration: "55 sec", thumbnail: "https://picsum.photos/seed/sf6/600/400", tags: ["Ads", "Promotional videos"] },
     ],
   },
   motion: {
@@ -135,12 +135,12 @@ export const PORTFOLIO = {
     title: "UI/UX Development",
     description: "Web design, app interfaces & front-end development",
     items: [
-      { id: 1, title: "SaaS Dashboard – AnalyticsPro", category: "Web App", thumbnail: "https://picsum.photos/seed/ux1/600/400", tags: ["Dashboard", "SaaS"] },
-      { id: 2, title: "E-Commerce Redesign – ShopFlow", category: "E-Commerce", thumbnail: "https://picsum.photos/seed/ux2/600/400", tags: ["E-Commerce", "Redesign"] },
-      { id: 3, title: "Mobile App – HealthTrack", category: "Mobile", thumbnail: "https://picsum.photos/seed/ux3/600/400", tags: ["Mobile", "Health"] },
-      { id: 4, title: "Landing Page – StartupXYZ", category: "Landing Page", thumbnail: "https://picsum.photos/seed/ux4/600/400", tags: ["Landing", "Startup"] },
-      { id: 5, title: "Portfolio Site – Photographer", category: "Portfolio", thumbnail: "https://picsum.photos/seed/ux5/600/400", tags: ["Portfolio", "Design"] },
-      { id: 6, title: "Branding + Web – NovaBrand", category: "Branding", thumbnail: "https://picsum.photos/seed/ux6/600/400", tags: ["Branding", "Web"] },
+      { id: 1, title: "SaaS Dashboard – AnalyticsPro", category: "Web App", thumbnail: "https://picsum.photos/seed/ux1/600/400", tags: ["Landing page"] },
+      { id: 2, title: "E-Commerce Redesign – ShopFlow", category: "E-Commerce", thumbnail: "https://picsum.photos/seed/ux2/600/400", tags: ["CMS Development"] },
+      { id: 3, title: "Mobile App – HealthTrack", category: "Mobile", thumbnail: "https://picsum.photos/seed/ux3/600/400", tags: ["Multi pager", ] },
+      { id: 4, title: "Landing Page – StartupXYZ", category: "Landing Page", thumbnail: "https://picsum.photos/seed/ux4/600/400", tags: ["Landing page", "React App"] },
+      { id: 5, title: "Portfolio Site – Photographer", category: "Portfolio", thumbnail: "https://picsum.photos/seed/ux5/600/400", tags: ["React App"] },
+      { id: 6, title: "Branding + Web – NovaBrand", category: "Branding", thumbnail: "https://picsum.photos/seed/ux6/600/400", tags: ["Multi pager"] },
     ],
   },
 };
@@ -181,7 +181,7 @@ export const TESTIMONIALS = [
 export const ABOUT = {
   headline: "We Are Visual Air Media",
   paragraph1:
-    "Founded in Bengaluru, Visual Air Media is a full-service creative studio dedicated to one mission: making your brand impossible to ignore. We combine strategic thinking with world-class visual craft.",
+    "Founded in Jamshedpur, Visual Air Media is a full-service creative studio dedicated to one mission: making your brand impossible to ignore. We combine strategic thinking with world-class visual craft.",
   paragraph2:
     "Whether you need a cinematic brand film, a viral Reel, a stunning explainer, or a conversion-focused website — we deliver visuals that take flight.",
   values: [
@@ -237,5 +237,5 @@ export const CONTACT = {
 // ── FOOTER ────────────────────────────────────────────────
 export const FOOTER = {
   copyright: "© 2025 Visual Air Media. All Rights Reserved.",
-  tagline: "Crafted with ❤️ in Bengaluru, India",
+  tagline: "Crafted with ❤️ in Jamshedpur, India",
 };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { SERVICES } from "../content/siteContent";
 import { useScrollAnimation, fadeLeft, fadeRight, fadeUp } from "../hooks/useScrollAnimation";
@@ -109,10 +109,31 @@ function ServiceCard({ service, index }) {
 }
 
 export default function Services() {
+  
   const { ref, isInView } = useScrollAnimation();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y1      = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const y2      = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
   return (
-    <section id="services" className="py-24 px-6 " style={{ background: "var(--bg-surface)" }}>
+    <section id="services" className="py-24 px-6 " style={{ background: "var(--bg-surface)",position: "relative" }}>
+      {/* Background blobs */}
+      <motion.div
+        style={{
+          position: "absolute", top: 0, left: 0,
+          width: 500, height: 500, borderRadius: "50%",
+          background: "var(--accent-glow)", filter: "blur(120px)",
+          pointerEvents: "none", y: y1,
+        }}
+      />
+      <motion.div
+        style={{
+          position: "absolute", bottom: 0, right: -60,
+          width: 360, height: 360, borderRadius: "50%",
+          background: "rgba(244,114,182,0.07)", filter: "blur(100px)",
+          pointerEvents: "none", y: y2,
+        }}
+      />
       {/* Title */}
       <motion.div
         ref={ref}
