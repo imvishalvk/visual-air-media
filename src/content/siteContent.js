@@ -57,6 +57,8 @@ export const SERVICES = [
     tags: ["Brand Films", "Documentaries", "Podcast", "After Movie"],
     portfolioPath: "/portfolio/longform",
     color: "pink",
+    youtubeId: "8Dq5RvJ0sPQ",
+    youtubeLabel: "Watch Brand Film",
   },
   {
     id: "shortform",
@@ -99,8 +101,8 @@ export const PORTFOLIO = {
     title: "Long Form Videos",
     description: "Cinematic brand films, documentaries & YouTube series",
     items: [
-      { id: 1, title: "Brand Documentary – TechCorp", category: "Documentary", duration: "12 min", thumbnail: "https://picsum.photos/seed/lf1/600/400", tags: ["Documentary", "After Movie"] },
-      { id: 2, title: "YouTube Series – The Build", category: "YouTube Series", duration: "28 min", thumbnail: "https://picsum.photos/seed/lf2/600/400", tags: ["Podcast"] },
+      { id: 1, title: "Brand Documentary – TechCorp", category: "Documentary", duration: "12 min", thumbnail: "https://i.ytimg.com/vi/JiiA6dHoZsg/oar2.jpg?sqp=-oaymwErCJUDEOAESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLBet6WVE2NzKOOejXUJA5EiEha6DQ&usqp=CCk", tags: ["Documentary", "After Movie"] },
+      { id: 2, title: "YouTube Series – The Build", category: "YouTube Series", duration: "28 min", thumbnail: "https://picsum.photos/seed/lf2/600/400", tags: ["Podcast"],youtubeId:"v=iCQfH6Vtqto&list=PL0WOmNOIqLjYwvt_l0acavQ-uRM4hazze&index=1" },
       { id: 3, title: "Product Launch Film – NovaTech", category: "Brand Film", duration: "5 min", thumbnail: "https://picsum.photos/seed/lf3/600/400", tags: ["After Movie"] },
       { id: 4, title: "Corporate Annual Report", category: "Documentary", duration: "8 min", thumbnail: "https://picsum.photos/seed/lf4/600/400", tags: ["Documentary", "Podcast"] },
       { id: 5, title: "Startup Story – FinEdge", category: "Documentary", duration: "15 min", thumbnail: "https://picsum.photos/seed/lf5/600/400", tags: ["After Movie", "Podcast"] },

@@ -1,52 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useScrollAnimation, fadeUp, scaleIn } from "../hooks/useScrollAnimation";
+import { useScrollAnimation, fadeUp } from "../hooks/useScrollAnimation";
 
-function PortfolioCard({ item, index, onClick }) {
-  const { ref, isInView } = useScrollAnimation({ margin: "-40px" });
-  const fromLeft = index % 2 === 0;
-
-  return (
-    <motion.div
-      ref={ref}
-      variants={{
-        hidden: { opacity: 0, x: fromLeft ? -50 : 50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.65, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] } },
-      }}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      className="portfolio-card group cursor-pointer"
-      onClick={() => onClick(item)}
-    >
-      <img src={item.thumbnail} alt={item.title} loading="lazy" />
-      <div className="overlay" />
-
-      {/* Duration badge */}
-      {item.duration && (
-        <div className="absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-bold text-white"
-          style={{ background: "rgba(13,11,20,0.8)", backdropFilter: "blur(8px)" }}>
-          {item.duration}
-        </div>
-      )}
-
-      {/* Bottom info (visible on hover) */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-        <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "var(--accent-pink)" }}>
-          {item.category}
-        </p>
-        <h3 className="text-sm font-black text-white" style={{ fontFamily: "Poppins, sans-serif" }}>{item.title}</h3>
-        <div className="flex flex-wrap gap-1 mt-2">
-          {item.tags.map(t => (
-            <span key={t} className="px-2 py-0.5 rounded text-xs font-medium"
-              style={{ background: "rgba(233,30,140,0.2)", color: "var(--accent-light)" }}>{t}</span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function LightboxModal({ item, onClose }) {
+// ── Video/Image Modal ─────────────────────────────────────
+function Modal({ item, onClose }) {
   return (
     <AnimatePresence>
       {item && (
@@ -54,30 +11,127 @@ function LightboxModal({ item, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-6"
-          style={{ background: "rgba(13,11,20,0.95)", backdropFilter: "blur(12px)" }}
           onClick={onClose}
+          style={{
+            position: "fixed", inset: 0, zIndex: 999,
+            background: "rgba(13,11,20,0.96)",
+            backdropFilter: "blur(16px)",
+            display: "flex", alignItems: "center",
+            justifyContent: "center", padding: 20,
+          }}
         >
           <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.85, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl w-full rounded-2xl overflow-hidden"
-            style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
+            initial={{ scale: 0.88, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.88, opacity: 0, y: 20 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             onClick={e => e.stopPropagation()}
+            style={{
+              width: "100%", maxWidth: 780,
+              background: "var(--bg-card)",
+              borderRadius: 20,
+              border: "1px solid var(--border)",
+              overflow: "hidden",
+              boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
+            }}
           >
-            <img src={item.thumbnail} alt={item.title} className="w-full h-72 object-cover" />
-            <div className="p-8">
-              <p className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: "var(--accent-pink)" }}>{item.category}</p>
-              <h3 className="text-2xl font-black text-white mb-3" style={{ fontFamily: "Poppins, sans-serif" }}>{item.title}</h3>
-              <div className="flex flex-wrap gap-2">
-                {item.tags.map(t => (
-                  <span key={t} className="px-3 py-1 rounded-full text-xs font-semibold"
-                    style={{ background: "rgba(233,30,140,0.15)", color: "var(--accent-pink)" }}>{t}</span>
+            {/* ── Header bar ─────────────────────────────── */}
+            <div style={{
+              display: "flex", alignItems: "center",
+              justifyContent: "space-between",
+              padding: "14px 18px",
+              borderBottom: "1px solid var(--border)",
+            }}>
+              <div>
+                <p style={{
+                  margin: 0, fontSize: 10, fontWeight: 700,
+                  letterSpacing: "0.15em", textTransform: "uppercase",
+                  color: "var(--accent-pink)", fontFamily: "Poppins, sans-serif",
+                }}>
+                  {item.category}
+                </p>
+                <h3 style={{
+                  margin: "2px 0 0", fontSize: 15, fontWeight: 700,
+                  color: "#fff", fontFamily: "Poppins, sans-serif",
+                }}>
+                  {item.title}
+                </h3>
+              </div>
+              <button
+                onClick={onClose}
+                style={{
+                  background: "var(--bg-surface)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)",
+                  borderRadius: 8, padding: "6px 14px",
+                  cursor: "pointer", fontSize: 13,
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 600,
+                  flexShrink: 0,
+                }}
+              >
+                ✕ Close
+              </button>
+            </div>
+
+            {/* ── Video player (16:9) ─────────────────────── */}
+            {item.youtubeId ? (
+              <div style={{
+                position: "relative",
+                paddingBottom: "56.25%",
+                height: 0,
+                background: "#000",
+              }}>
+                <iframe
+                  src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={item.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{
+                    position: "absolute", inset: 0,
+                    width: "100%", height: "100%",
+                    border: "none",
+                  }}
+                />
+              </div>
+            ) : (
+              /* Fallback — show image if no youtubeId */
+              <img
+                src={item.thumbnail}
+                alt={item.title}
+                style={{ width: "100%", maxHeight: 420, objectFit: "cover" }}
+              />
+            )}
+
+            {/* ── Footer info ─────────────────────────────── */}
+            <div style={{
+              padding: "14px 18px",
+              borderTop: "1px solid var(--border)",
+              display: "flex", alignItems: "center",
+              justifyContent: "space-between", flexWrap: "wrap", gap: 10,
+            }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {item.tags.map(tag => (
+                  <span key={tag} style={{
+                    padding: "3px 10px", borderRadius: 20,
+                    fontSize: 10, fontWeight: 600,
+                    fontFamily: "Poppins, sans-serif",
+                    background: "rgba(233,30,140,0.12)",
+                    color: "var(--accent-pink)",
+                    border: "1px solid rgba(233,30,140,0.3)",
+                  }}>
+                    {tag}
+                  </span>
                 ))}
               </div>
-              <button onClick={onClose} className="mt-6 btn-outline text-sm">Close ✕</button>
+              {item.duration && (
+                <span style={{
+                  fontSize: 11, color: "var(--text-subtle)",
+                  fontFamily: "Poppins, sans-serif",
+                }}>
+                  ⏱ {item.duration}
+                </span>
+              )}
             </div>
           </motion.div>
         </motion.div>
@@ -86,45 +140,242 @@ function LightboxModal({ item, onClose }) {
   );
 }
 
+// ── Portfolio card ────────────────────────────────────────
+function PortfolioCard({ item, index, onClick }) {
+  const { ref, isInView } = useScrollAnimation({ margin: "-40px" });
+  const fromLeft = index % 2 === 0;
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: fromLeft ? -50 : 50 }}
+      animate={isInView
+        ? { opacity: 1, x: 0, transition: { duration: 0.65, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] } }
+        : { opacity: 0, x: fromLeft ? -50 : 50 }
+      }
+      onClick={() => onClick(item)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative", borderRadius: 14,
+        overflow: "hidden", cursor: "pointer",
+        border: hovered
+          ? "1px solid rgba(233,30,140,0.4)"
+          : "1px solid var(--border)",
+        transition: "border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
+        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+        boxShadow: hovered ? "0 12px 40px rgba(233,30,140,0.15)" : "none",
+      }}
+    >
+      {/* Thumbnail */}
+      <div style={{ position: "relative", overflow: "hidden" }}>
+        <img
+          src={item.thumbnail}
+          alt={item.title}
+          loading="lazy"
+          style={{
+            width: "100%", height: 220,
+            objectFit: "cover", display: "block",
+            transition: "transform 0.5s ease",
+            transform: hovered ? "scale(1.06)" : "scale(1)",
+          }}
+        />
+
+        {/* Dark overlay */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to top, rgba(13,11,20,0.9) 0%, transparent 55%)",
+          opacity: hovered ? 1 : 0.4,
+          transition: "opacity 0.3s ease",
+        }} />
+
+        {/* Play button — center, shows on hover */}
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.2 }}
+              style={{
+                position: "absolute", inset: 0,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+            >
+              <div style={{
+                width: 52, height: 52, borderRadius: "50%",
+                background: "var(--accent-pink)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 0 30px rgba(233,30,140,0.5)",
+              }}>
+                <div style={{
+                  width: 0, height: 0,
+                  borderTop: "10px solid transparent",
+                  borderBottom: "10px solid transparent",
+                  borderLeft: "18px solid #fff",
+                  marginLeft: 4,
+                }} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Duration badge */}
+        {item.duration && (
+          <div style={{
+            position: "absolute", top: 10, right: 10,
+            background: "rgba(13,11,20,0.85)",
+            backdropFilter: "blur(6px)",
+            borderRadius: 6, padding: "3px 8px",
+          }}>
+            <span style={{
+              fontSize: 10, color: "#fff",
+              fontFamily: "Poppins, sans-serif", fontWeight: 600,
+            }}>
+              {item.duration}
+            </span>
+          </div>
+        )}
+
+        {/* YouTube badge — shows if video available */}
+        {item.youtubeId && (
+          <div style={{
+            position: "absolute", top: 10, left: 10,
+            background: "rgba(233,30,140,0.9)",
+            borderRadius: 6, padding: "3px 8px",
+            display: "flex", alignItems: "center", gap: 4,
+          }}>
+            <div style={{
+              width: 0, height: 0,
+              borderTop: "5px solid transparent",
+              borderBottom: "5px solid transparent",
+              borderLeft: "8px solid #fff",
+            }} />
+            <span style={{
+              fontSize: 9, color: "#fff",
+              fontFamily: "Poppins, sans-serif", fontWeight: 700,
+              letterSpacing: "0.05em",
+            }}>
+              VIDEO
+            </span>
+          </div>
+        )}
+
+        {/* Bottom info — shows on hover */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          padding: "10px 12px",
+          transform: hovered ? "translateY(0)" : "translateY(6px)",
+          opacity: hovered ? 1 : 0,
+          transition: "all 0.3s ease",
+        }}>
+          <p style={{
+            margin: "0 0 4px", fontSize: 10, fontWeight: 700,
+            color: "var(--accent-pink)", fontFamily: "Poppins, sans-serif",
+            letterSpacing: "0.1em", textTransform: "uppercase",
+          }}>
+            {item.category}
+          </p>
+          <h3 style={{
+            margin: 0, fontSize: 13, fontWeight: 700,
+            color: "#fff", fontFamily: "Poppins, sans-serif",
+          }}>
+            {item.title}
+          </h3>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 6 }}>
+            {item.tags.slice(0, 2).map(t => (
+              <span key={t} style={{
+                padding: "2px 8px", borderRadius: 20,
+                fontSize: 9, fontWeight: 600,
+                fontFamily: "Poppins, sans-serif",
+                background: "rgba(233,30,140,0.2)",
+                color: "var(--accent-light)",
+              }}>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Main gallery ──────────────────────────────────────────
 export default function PortfolioGallery({ title, description, items }) {
   const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState(null);
   const { ref, isInView } = useScrollAnimation();
 
   const allTags = ["All", ...Array.from(new Set(items.flatMap(i => i.tags)))];
-  const filtered = filter === "All" ? items : items.filter(i => i.tags.includes(filter));
+  const filtered = filter === "All"
+    ? items
+    : items.filter(i => i.tags.includes(filter));
 
   return (
-    <div id="" className="min-h-screen pt-28 pb-24 px-6" style={{ background: "var(--bg-primary)" }}>
-      {/* Page header */}
+    <div style={{
+      minHeight: "100vh",
+      paddingTop: 100, paddingBottom: 96,
+      paddingLeft: 24, paddingRight: 24,
+      background: "var(--bg-primary)",
+    }}>
+      {/* Header */}
       <motion.div
         ref={ref}
         variants={fadeUp}
         custom={0}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-5xl mx-auto text-center mb-14"
+        style={{ maxWidth: 960, margin: "0 auto", textAlign: "center", marginBottom: 48 }}
       >
         <span className="section-label">Portfolio</span>
-        <h1 className="text-4xl md:text-6xl font-black text-white mb-4" style={{ fontFamily: "Poppins, sans-serif" }}>
-          {title.split(" ").map((w, i) => i === title.split(" ").length - 1
-            ? <span key={i} className="text-gradient"> {w}</span>
-            : ` ${w}`
+        <h1 style={{
+          fontFamily: "Poppins, sans-serif", fontWeight: 800,
+          fontSize: "clamp(1.8rem, 4vw, 3rem)",
+          color: "#fff", margin: "0 0 10px",
+        }}>
+          {title.split(" ").map((w, i, arr) =>
+            i === arr.length - 1 ? (
+              <span key={i} style={{
+                background: "var(--gradient-pink)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+                {" "}{w}
+              </span>
+            ) : ` ${w}`
           )}
         </h1>
-        <p className="text-sm max-w-xl mx-auto" style={{ color: "var(--text-muted)" }}>{description}</p>
+        <p style={{
+          color: "var(--text-muted)", fontSize: 13,
+          maxWidth: 480, margin: "0 auto 24px",
+          lineHeight: 1.6,
+        }}>
+          {description} — click any thumbnail to watch.
+        </p>
 
         {/* Filter tabs */}
-        <div className="flex flex-wrap gap-2 justify-center mt-8">
+        <div style={{
+          display: "flex", flexWrap: "wrap",
+          gap: 8, justifyContent: "center",
+        }}>
           {allTags.map(tag => (
             <button
               key={tag}
               onClick={() => setFilter(tag)}
-              className="px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200"
               style={{
-                background: filter === tag ? "var(--gradient-pink)" : "var(--bg-card)",
+                padding: "7px 16px", borderRadius: 50,
+                fontSize: 11, fontWeight: 700,
+                fontFamily: "Poppins, sans-serif",
+                cursor: "pointer", border: "none",
+                transition: "all 0.2s ease",
+                background: filter === tag
+                  ? "var(--gradient-pink)"
+                  : "var(--bg-card)",
                 color: filter === tag ? "#fff" : "var(--text-muted)",
-                border: filter === tag ? "none" : "1px solid var(--border)",
+                outline: filter !== tag ? "1px solid var(--border)" : "none",
               }}
             >
               {tag}
@@ -134,16 +385,26 @@ export default function PortfolioGallery({ title, description, items }) {
       </motion.div>
 
       {/* Grid */}
-      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <AnimatePresence mode="wait">
+      <div style={{
+        maxWidth: 960, margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+        gap: 16,
+      }}>
+        <AnimatePresence>
           {filtered.map((item, i) => (
-            <PortfolioCard key={item.id} item={item} index={i} onClick={setSelected} />
+            <PortfolioCard
+              key={item.id}
+              item={item}
+              index={i}
+              onClick={setSelected}
+            />
           ))}
         </AnimatePresence>
       </div>
 
-      {/* Lightbox */}
-      <LightboxModal item={selected} onClose={() => setSelected(null)} />
+      {/* Modal */}
+      <Modal item={selected} onClose={() => setSelected(null)} />
     </div>
   );
 }
