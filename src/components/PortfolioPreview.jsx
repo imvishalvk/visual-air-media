@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { SERVICES } from "../content/siteContent";
 import { useScrollAnimation, fadeUp, scaleIn } from "../hooks/useScrollAnimation";
@@ -11,7 +11,6 @@ const colorMap = {
   green:  { accent: "#22C55E", glow: "rgba(34,197,94,0.15)",  border: "rgba(34,197,94,0.4)"  },
 };
 
-// ── Single service card with inline video player ──────────
 function ServiceCard({ service, index }) {
   const { ref, isInView } = useScrollAnimation();
   const [playing, setPlaying] = useState(false);
@@ -44,23 +43,23 @@ function ServiceCard({ service, index }) {
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      {/* ── Video area ───────────────────────────────────── */}
+      {/* ── Video / Thumbnail area ── */}
       <div style={{
         position: "relative",
         width: "100%",
-        paddingBottom: "56.25%", /* 16:9 */
+        paddingBottom: "56.25%",
         background: "#000",
         overflow: "hidden",
-        cursor: playing ? "default" : "pointer",
+        flexShrink: 0,
       }}>
-
-        {/* YouTube iframe — always mounted, just hidden until play */}
         {playing ? (
+          /* ── PLAYING: show iframe ── */
           <iframe
-            src={`https://www.youtube.com/embed/${service.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+            src={`https://www.youtube-nocookie.com/embed/${service.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
             title={service.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             style={{
               position: "absolute", inset: 0,
               width: "100%", height: "100%",
@@ -68,12 +67,15 @@ function ServiceCard({ service, index }) {
             }}
           />
         ) : (
-          /* Thumbnail + play button overlay */
+          /* ── NOT PLAYING: show thumbnail + play button ── */
           <div
             onClick={() => setPlaying(true)}
-            style={{ position: "absolute", inset: 0 }}
+            style={{
+              position: "absolute", inset: 0,
+              cursor: "pointer",
+            }}
           >
-            {/* Thumbnail image */}
+            {/* Thumbnail */}
             <img
               src={`https://img.youtube.com/vi/${service.youtubeId}/maxresdefault.jpg`}
               alt={service.title}
@@ -90,24 +92,26 @@ function ServiceCard({ service, index }) {
             {/* Gradient overlay */}
             <div style={{
               position: "absolute", inset: 0,
-              background: "linear-gradient(to top, rgba(13,11,20,0.7) 0%, rgba(13,11,20,0.2) 60%, transparent 100%)",
+              background: "linear-gradient(to top, rgba(13,11,20,0.75) 0%, rgba(13,11,20,0.15) 60%, transparent 100%)",
             }} />
 
-            {/* Play button — center */}
+            {/* Center play button */}
             <div style={{
               position: "absolute", inset: 0,
               display: "flex", alignItems: "center", justifyContent: "center",
             }}>
               <motion.div
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.95 }}
                 style={{
-                  width: 60, height: 60, borderRadius: "50%",
+                  width: 62, height: 62,
+                  borderRadius: "50%",
                   background: c.accent,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: `0 0 30px ${c.glow}, 0 0 60px ${c.glow}`,
+                  boxShadow: `0 0 0 12px ${c.glow}, 0 8px 32px rgba(0,0,0,0.4)`,
                 }}
               >
+                {/* Play triangle */}
                 <div style={{
                   width: 0, height: 0,
                   borderTop: "11px solid transparent",
@@ -118,7 +122,7 @@ function ServiceCard({ service, index }) {
               </motion.div>
             </div>
 
-            {/* Top-left badge */}
+            {/* Top-left service badge */}
             <div style={{
               position: "absolute", top: 12, left: 12,
               background: "rgba(13,11,20,0.85)",
@@ -129,55 +133,65 @@ function ServiceCard({ service, index }) {
             }}>
               <span style={{ fontSize: 12 }}>{service.icon}</span>
               <span style={{
-                fontSize: 10, fontWeight: 700, color: c.accent,
-                fontFamily: "Poppins, sans-serif", letterSpacing: "0.05em",
+                fontSize: 9, fontWeight: 700, color: c.accent,
+                fontFamily: "Poppins, sans-serif", letterSpacing: "0.08em",
+                textTransform: "uppercase",
               }}>
-                {service.subtitle.toUpperCase()}
+                {service.subtitle}
               </span>
             </div>
 
-            {/* Top-right preview badge */}
+            {/* Top-right click to play badge */}
             <div style={{
               position: "absolute", top: 12, right: 12,
               background: "rgba(13,11,20,0.85)",
               backdropFilter: "blur(8px)",
-              borderRadius: 6, padding: "3px 8px",
+              borderRadius: 6, padding: "4px 10px",
+              display: "flex", alignItems: "center", gap: 5,
             }}>
+              <div style={{
+                width: 0, height: 0,
+                borderTop: "4px solid transparent",
+                borderBottom: "4px solid transparent",
+                borderLeft: "7px solid #fff",
+              }} />
               <span style={{
-                fontSize: 10, color: "#fff",
+                fontSize: 9, color: "#fff",
                 fontFamily: "Poppins, sans-serif", fontWeight: 600,
+                letterSpacing: "0.05em",
               }}>
-                ▶ Click to Play
+                CLICK TO PLAY
               </span>
             </div>
 
             {/* Bottom label */}
             <div style={{
               position: "absolute", bottom: 12, left: 12, right: 12,
-              display: "flex", alignItems: "center", justifyContent: "space-between",
+              display: "flex", alignItems: "flex-end",
+              justifyContent: "space-between",
             }}>
               <span style={{
                 color: "#fff", fontSize: 13, fontWeight: 700,
                 fontFamily: "Poppins, sans-serif",
-                textShadow: "0 1px 4px rgba(0,0,0,0.8)",
+                textShadow: "0 1px 6px rgba(0,0,0,0.8)",
               }}>
                 {service.youtubeLabel}
               </span>
               <span style={{
                 background: c.accent, color: "#fff",
-                fontSize: 9, fontWeight: 700,
+                fontSize: 8, fontWeight: 800,
                 fontFamily: "Poppins, sans-serif",
                 padding: "3px 8px", borderRadius: 4,
-                letterSpacing: "0.05em",
+                letterSpacing: "0.08em", textTransform: "uppercase",
               }}>
-                YOUTUBE
+                YouTube
               </span>
             </div>
           </div>
         )}
       </div>
 
-      {/* ── Card body ─────────────────────────────────────── */}
+      {/* ── Card body ── */}
       <div style={{
         padding: "16px 18px 18px",
         display: "flex", flexDirection: "column", gap: 10, flex: 1,
@@ -204,7 +218,7 @@ function ServiceCard({ service, index }) {
 
         {/* Tags */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-          {service.tags.slice(0, 3).map(tag => (
+          {service.tags.map(tag => (
             <span key={tag} style={{
               padding: "3px 10px", borderRadius: 20,
               fontSize: 10, fontWeight: 600,
@@ -221,11 +235,9 @@ function ServiceCard({ service, index }) {
         <div style={{
           display: "flex", alignItems: "center",
           justifyContent: "space-between",
-          paddingTop: 10,
+          paddingTop: 10, marginTop: 4,
           borderTop: "1px solid var(--border)",
-          marginTop: 4,
         }}>
-          {/* Replay button — shows after playing */}
           {playing ? (
             <button
               onClick={() => setPlaying(false)}
@@ -256,7 +268,6 @@ function ServiceCard({ service, index }) {
             </button>
           )}
 
-          {/* View portfolio link */}
           <Link
             to={service.portfolioPath}
             style={{
@@ -276,7 +287,6 @@ function ServiceCard({ service, index }) {
   );
 }
 
-// ── Main section ──────────────────────────────────────────
 export default function PortfolioPreview() {
   const { ref, isInView } = useScrollAnimation();
 
@@ -314,16 +324,16 @@ export default function PortfolioPreview() {
           </h2>
           <p style={{
             color: "var(--text-muted)", fontSize: 13,
-            maxWidth: 360, margin: "10px auto 0", lineHeight: 1.6,
+            maxWidth: 380, margin: "10px auto 0", lineHeight: 1.6,
           }}>
-            Watch our work — click any card to play directly.
+            Click any card to watch our work directly on the page.
           </p>
         </motion.div>
 
         {/* 2x2 grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
           gap: 20,
         }}>
           {SERVICES.map((service, i) => (

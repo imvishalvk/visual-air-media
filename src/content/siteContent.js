@@ -12,7 +12,7 @@ export const COMPANY = {
     "We craft stunning visual experiences — from cinematic long-form edits to viral short-form content, breathtaking motion graphics, and polished UI/UX designs that convert.",
   email: "hello@visualairmedia.com",
   phone: "+91 98765 43210",
-  location: "Jamshedpur, Jharkhand, India",
+  location: "Bengaluru, Karnataka, India",
   instagram: "https://instagram.com/visualairmedia",
   linkedin: "https://linkedin.com/company/visualairmedia",
   youtube: "https://youtube.com/@visualairmedia",
@@ -33,19 +33,18 @@ export const HERO = {
   badge: "✦ Creative Studio · Est. 2020",
   headline1: "Where Visuals",
   headline2: "Take Flight",
-  highlightWord: "Flight",
   description:
     "We transform ideas into stunning visual stories. Long-form films, short-form content, motion graphics, and UI/UX — all under one roof.",
   cta1: { label: "View Our Work", href: "#portfolio" },
-  cta2: { label: "Get a Quote", href: "#contact" },
+  cta2: { label: "Get a Quote",   href: "#contact"   },
   stats: [
     { number: "300+", label: "Projects Delivered" },
-    { number: "80+", label: "Happy Clients" },
-    { number: "4+", label: "Years of Excellence" },
+    { number: "80+",  label: "Happy Clients"       },
+    { number: "4+",   label: "Years of Excellence" },
   ],
 };
 
-// ── SERVICES SECTION ─────────────────────────────────────
+// ── SERVICES ─────────────────────────────────────────────
 export const SERVICES = [
   {
     id: "longform",
@@ -53,12 +52,13 @@ export const SERVICES = [
     title: "Long Form Videos",
     subtitle: "Cinematic storytelling",
     description:
-      "Documentary-grade edits, brand films, interview series, and YouTube long-form content that captivates and retains viewers till the very end.",
-    tags: ["Brand Films", "Documentaries", "Podcast", "After Movie"],
+      "Documentary-grade edits, explainer films, after movies, and podcast productions that captivate audiences from first frame to last.",
+    tags: ["Explainer", "After Movies", "Podcast"],
     portfolioPath: "/portfolio/longform",
     color: "pink",
-    youtubeId: "8Dq5RvJ0sPQ",
-    youtubeLabel: "Watch Brand Film",
+    // ✏️ Featured video shown on homepage card
+    youtubeId: "iCQfH6Vtqto",
+    youtubeLabel: "Watch Explainer",
   },
   {
     id: "shortform",
@@ -66,10 +66,13 @@ export const SERVICES = [
     title: "Short Form Videos",
     subtitle: "Built for virality",
     description:
-      "Thumb-stopping Reels, TikToks, YouTube Shorts, and social cuts engineered for engagement, reach, and platform algorithm performance.",
-    tags: ["Instagram Reels", "YouTube Shorts", "TikTok", "Ad Cuts"],
+      "Thumb-stopping promos, motion graphics cuts, and caption shorts engineered for maximum reach and platform algorithm performance.",
+    tags: ["Promo", "Motion Graphics", "Caption Shorts"],
     portfolioPath: "/portfolio/shortform",
     color: "purple",
+    // ✏️ Featured video shown on homepage card
+    youtubeId: "5nCJgSeC_28",
+    youtubeLabel: "Watch Short",
   },
   // {
   //   id: "motion",
@@ -77,10 +80,13 @@ export const SERVICES = [
   //   title: "Motion Graphics",
   //   subtitle: "Animation that wows",
   //   description:
-  //     "Explainer animations, 2D/3D motion sequences, kinetic typography, logo reveals, and visual effects that bring brands to life.",
+  //     "Explainer animations, logo reveals, kinetic typography, and 3D product sequences that make your brand impossible to ignore.",
   //   tags: ["Explainer Videos", "Logo Animation", "3D Motion", "Infographics"],
   //   portfolioPath: "/portfolio/motion",
   //   color: "blue",
+  //   // ✏️ Replace with your motion graphics video ID when ready
+  //   youtubeId: "LmS8HWOQOcM",
+  //   youtubeLabel: "Watch Demo",
   // },
   {
     id: "uiux",
@@ -92,57 +98,242 @@ export const SERVICES = [
     tags: ["Web Design", "App UI", "Prototyping", "Front-End Dev"],
     portfolioPath: "/portfolio/uiux",
     color: "green",
+    // ✏️ Replace with your UI/UX showcase video ID when ready
+    youtubeId: "c_Asq2z4tto",
+    youtubeLabel: "Watch Case Study",
   },
 ];
 
 // ── PORTFOLIO PAGES ──────────────────────────────────────
+// ✏️ youtubeId on each item = video plays in popup when thumbnail clicked
+// ✏️ Leave youtubeId as "" to show image only (no video popup)
+
 export const PORTFOLIO = {
+
+  // ── LONG FORM ─────────────────────────────────────────
   longform: {
     title: "Long Form Videos",
-    description: "Cinematic brand films, documentaries & YouTube series",
+    description: "Explainer films, after movies & podcast productions",
     items: [
-      { id: 1, title: "Brand Documentary – TechCorp", category: "Documentary", duration: "12 min", thumbnail: "https://i.ytimg.com/vi/JiiA6dHoZsg/oar2.jpg?sqp=-oaymwErCJUDEOAESFqQAgHyq4qpAxoIARUAAIhCyAEB2AEB4gEKCBgQAhgGOAFAAQ==&rs=AOn4CLBet6WVE2NzKOOejXUJA5EiEha6DQ&usqp=CCk", tags: ["Documentary", "After Movie"] },
-      { id: 2, title: "YouTube Series – The Build", category: "YouTube Series", duration: "28 min", thumbnail: "https://picsum.photos/seed/lf2/600/400", tags: ["Podcast"],youtubeId:"v=iCQfH6Vtqto&list=PL0WOmNOIqLjYwvt_l0acavQ-uRM4hazze&index=1" },
-      { id: 3, title: "Product Launch Film – NovaTech", category: "Brand Film", duration: "5 min", thumbnail: "https://picsum.photos/seed/lf3/600/400", tags: ["After Movie"] },
-      { id: 4, title: "Corporate Annual Report", category: "Documentary", duration: "8 min", thumbnail: "https://picsum.photos/seed/lf4/600/400", tags: ["Documentary", "Podcast"] },
-      { id: 5, title: "Startup Story – FinEdge", category: "Documentary", duration: "15 min", thumbnail: "https://picsum.photos/seed/lf5/600/400", tags: ["After Movie", "Podcast"] },
-      { id: 6, title: "Event Highlight – Summit 2024", category: "Event", duration: "6 min", thumbnail: "https://picsum.photos/seed/lf6/600/400", tags: ["Documentary", "After Movie"] },
+      // ── EXPLAINERS ──
+      {
+        id: 1,
+        title: "Pump Fun",
+        category: "Explainer",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/iCQfH6Vtqto/maxresdefault.jpg`,
+        tags: ["Explainer"],
+        youtubeId: "iCQfH6Vtqto",
+      },
+      {
+        id: 2,
+        title: "CDL Course VSL",
+        category: "Explainer",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/jfJadEyjk5o/maxresdefault.jpg`,
+        tags: ["Explainer"],
+        youtubeId: "jfJadEyjk5o",
+      },
+      {
+        id: 3,
+        title: "Chopped AVAX Car Titles",
+        category: "Explainer",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/rq3V9aQytGo/maxresdefault.jpg`,
+        tags: ["Explainer"],
+        youtubeId: "rq3V9aQytGo",
+      },
+      // ── AFTER MOVIES ──
+      {
+        id: 4,
+        title: "Reserve Aftermovie",
+        category: "After Movies",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/3hvbipc9gfM/maxresdefault.jpg`,
+        tags: ["After Movies"],
+        youtubeId: "3hvbipc9gfM",
+      },
+      {
+        id: 5,
+        title: "Humanity V2 Final",
+        category: "After Movies",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/KWFyyXPc2Ds/maxresdefault.jpg`,
+        tags: ["After Movies"],
+        youtubeId: "KWFyyXPc2Ds",
+      },
+      {
+        id: 6,
+        title: "Humanity Final",
+        category: "After Movies",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/RwLMntKzejY/maxresdefault.jpg`,
+        tags: ["After Movies"],
+        youtubeId: "RwLMntKzejY",
+      },
+      {
+        id: 7,
+        title: "Brinc Final Aftermovie",
+        category: "After Movies",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/NYE5yZqRyTE/maxresdefault.jpg`,
+        tags: ["After Movies"],
+        youtubeId: "NYE5yZqRyTE",
+      },
+      // ── PODCASTS ──
+      {
+        id: 8,
+        title: "Shreya Podcast",
+        category: "Podcast",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/1FE9p3wrcNI/maxresdefault.jpg`,
+        tags: ["Podcast"],
+        youtubeId: "1FE9p3wrcNI",
+      },
+      {
+        id: 9,
+        title: "Magic Eden Podcast",
+        category: "Podcast",
+        duration: "Long Form",
+        thumbnail: `https://img.youtube.com/vi/9tOD_Y84uR8/maxresdefault.jpg`,
+        tags: ["Podcast"],
+        youtubeId: "9tOD_Y84uR8",
+      },
     ],
   },
+
+  // ── SHORT FORM ────────────────────────────────────────
   shortform: {
     title: "Short Form Videos",
-    description: "Viral Reels, Shorts & social-first content",
+    description: "Promos, motion graphics cuts & caption shorts",
     items: [
-      { id: 1, title: "Product Reel – AirFlow", category: "Motion graphics", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf1/600/400", tags: ["Motion graphics", "Promotional videos"] },
-      { id: 2, title: "Brand Story – 60s Cut", category: "Brand", duration: "60 sec", thumbnail: "https://picsum.photos/seed/sf2/600/400", tags: ["Motion graphics", "Podcast clips"] },
-      { id: 3, title: "Tutorial Short – Design Tips", category: "YouTube Short", duration: "45 sec", thumbnail: "https://picsum.photos/seed/sf3/600/400", tags: ["Promotional videos", "YouTube"] },
-      { id: 4, title: "Event Teaser – TechFest", category: "Teaser", duration: "15 sec", thumbnail: "https://picsum.photos/seed/sf4/600/400", tags: ["Promotional videos", "Real estate"] },
-      { id: 5, title: "Ad Cut – SneakerDrop", category: "Ads", duration: "30 sec", thumbnail: "https://picsum.photos/seed/sf5/600/400", tags: ["Ads", "Real estate"] },
-      { id: 6, title: "TikTok Series – Day in Life", category: "Ads", duration: "55 sec", thumbnail: "https://picsum.photos/seed/sf6/600/400", tags: ["Ads", "Promotional videos"] },
+      {
+        id: 1,
+        title: "Founder's Word",
+        category: "Caption Shorts",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/5nCJgSeC_28/maxresdefault.jpg`,
+        tags: ["Caption Shorts"],
+        youtubeId: "5nCJgSeC_28",
+      },
+      {
+        id: 2,
+        title: "Goyal V2",
+        category: "Caption Shorts",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/9NxTLlrgd-E/maxresdefault.jpg`,
+        tags: ["Caption Shorts"],
+        youtubeId: "9NxTLlrgd-E",
+      },
+      {
+        id: 3,
+        title: "Real Estate Promo",
+        category: "Promo",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/LmS8HWOQOcM/maxresdefault.jpg`,
+        tags: ["Promo"],
+        youtubeId: "LmS8HWOQOcM",
+      },
+      {
+        id: 4,
+        title: "BoldFit Promo",
+        category: "Promo",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/c_Asq2z4tto/maxresdefault.jpg`,
+        tags: ["Promo"],
+        youtubeId: "c_Asq2z4tto",
+      },
+      // {
+      //   id: 5,
+      //   title: "Pump Fun — Motion",
+      //   category: "Motion Graphics",
+      //   duration: "Long Form",
+      //   thumbnail: `https://img.youtube.com/vi/iCQfH6Vtqto/maxresdefault.jpg`,
+      //   tags: ["Motion Graphics", "Explainer"],
+      //   youtubeId: "iCQfH6Vtqto",
+      // },
+      {
+        id: 6,
+        title: "Real Estate Motion",
+        category: "Motion Graphics",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/LmS8HWOQOcM/maxresdefault.jpg`,
+        tags: ["Motion Graphics", "Promo"],
+        youtubeId: "LmS8HWOQOcM",
+      },
+      {
+        id: 7,
+        title: "BoldFit Motion",
+        category: "Motion Graphics",
+        duration: "Short",
+        thumbnail: `https://img.youtube.com/vi/c_Asq2z4tto/maxresdefault.jpg`,
+        tags: ["Motion Graphics", "Promo"],
+        youtubeId: "c_Asq2z4tto",
+      },
     ],
   },
-  motion: {
-    title: "Motion Graphics",
-    description: "2D/3D animation, explainers & kinetic typography",
-    items: [
-      { id: 1, title: "Logo Reveal – BrandX", category: "Logo Animation", duration: "5 sec", thumbnail: "https://picsum.photos/seed/mg1/600/400", tags: ["Logo", "Reveal"] },
-      { id: 2, title: "Explainer – SaaS Product", category: "Explainer", duration: "90 sec", thumbnail: "https://picsum.photos/seed/mg2/600/400", tags: ["Explainer", "SaaS"] },
-      { id: 3, title: "Kinetic Typography – Manifesto", category: "Typography", duration: "60 sec", thumbnail: "https://picsum.photos/seed/mg3/600/400", tags: ["Typography", "Kinetic"] },
-      { id: 4, title: "Infographic Animation – Data2024", category: "Infographic", duration: "45 sec", thumbnail: "https://picsum.photos/seed/mg4/600/400", tags: ["Infographic", "Data"] },
-      { id: 5, title: "3D Product Spin – EarPods", category: "3D Animation", duration: "15 sec", thumbnail: "https://picsum.photos/seed/mg5/600/400", tags: ["3D", "Product"] },
-      { id: 6, title: "Social Motion Pack – Agency", category: "Social Pack", duration: "Various", thumbnail: "https://picsum.photos/seed/mg6/600/400", tags: ["Social", "Pack"] },
-    ],
-  },
+
+  // ── MOTION GRAPHICS ───────────────────────────────────
+  // motion: {
+  //   title: "Motion Graphics",
+  //   description: "2D/3D animation, explainers & kinetic typography",
+  //   items: [
+  //     {
+  //       id: 1,
+  //       title: "Pump Fun — Motion",
+  //       category: "Motion Graphics",
+  //       duration: "Long Form",
+  //       thumbnail: `https://img.youtube.com/vi/iCQfH6Vtqto/maxresdefault.jpg`,
+  //       tags: ["Motion Graphics", "Explainer"],
+  //       youtubeId: "iCQfH6Vtqto",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "Real Estate Motion",
+  //       category: "Motion Graphics",
+  //       duration: "Short",
+  //       thumbnail: `https://img.youtube.com/vi/LmS8HWOQOcM/maxresdefault.jpg`,
+  //       tags: ["Motion Graphics", "Promo"],
+  //       youtubeId: "LmS8HWOQOcM",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "BoldFit Motion",
+  //       category: "Motion Graphics",
+  //       duration: "Short",
+  //       thumbnail: `https://img.youtube.com/vi/c_Asq2z4tto/maxresdefault.jpg`,
+  //       tags: ["Motion Graphics", "Promo"],
+  //       youtubeId: "c_Asq2z4tto",
+  //     },
+  //   ],
+  // },
+
+  // ── UI/UX ─────────────────────────────────────────────
+  // ✏️ Add your UI/UX project links below when ready
+  // For web links use: websiteUrl instead of youtubeId
   uiux: {
     title: "UI/UX Development",
     description: "Web design, app interfaces & front-end development",
     items: [
-      { id: 1, title: "SaaS Dashboard – AnalyticsPro", category: "Web App", thumbnail: "https://picsum.photos/seed/ux1/600/400", tags: ["Landing page"] },
-      { id: 2, title: "E-Commerce Redesign – ShopFlow", category: "E-Commerce", thumbnail: "https://picsum.photos/seed/ux2/600/400", tags: ["CMS Development"] },
-      { id: 3, title: "Mobile App – HealthTrack", category: "Mobile", thumbnail: "https://picsum.photos/seed/ux3/600/400", tags: ["Multi pager", ] },
-      { id: 4, title: "Landing Page – StartupXYZ", category: "Landing Page", thumbnail: "https://picsum.photos/seed/ux4/600/400", tags: ["Landing page", "React App"] },
-      { id: 5, title: "Portfolio Site – Photographer", category: "Portfolio", thumbnail: "https://picsum.photos/seed/ux5/600/400", tags: ["React App"] },
-      { id: 6, title: "Branding + Web – NovaBrand", category: "Branding", thumbnail: "https://picsum.photos/seed/ux6/600/400", tags: ["Multi pager"] },
+      {
+        id: 1,
+        title: "Coming Soon — Project 1",
+        category: "Web Design",
+        thumbnail: "https://picsum.photos/seed/ux1/600/400",
+        tags: ["Web Design"],
+        youtubeId: "",
+        // ✏️ Add website URL here when ready:
+        websiteUrl: "",
+      },
+      {
+        id: 2,
+        title: "Coming Soon — Project 2",
+        category: "App UI",
+        thumbnail: "https://picsum.photos/seed/ux2/600/400",
+        tags: ["App UI"],
+        youtubeId: "",
+        websiteUrl: "",
+      },
     ],
   },
 };
@@ -183,14 +374,14 @@ export const TESTIMONIALS = [
 export const ABOUT = {
   headline: "We Are Visual Air Media",
   paragraph1:
-    "Founded in Jamshedpur, Visual Air Media is a full-service creative studio dedicated to one mission: making your brand impossible to ignore. We combine strategic thinking with world-class visual craft.",
+    "Founded in Bengaluru, Visual Air Media is a full-service creative studio dedicated to one mission: making your brand impossible to ignore. We combine strategic thinking with world-class visual craft.",
   paragraph2:
     "Whether you need a cinematic brand film, a viral Reel, a stunning explainer, or a conversion-focused website — we deliver visuals that take flight.",
   values: [
-    { icon: "🎯", title: "Strategy First", desc: "Every visual decision is backed by a clear creative strategy." },
-    { icon: "✨", title: "Pixel Perfect", desc: "Obsessive attention to detail in every frame and every pixel." },
-    { icon: "🚀", title: "On-Time Delivery", desc: "We respect your deadlines as much as you do." },
-    { icon: "🤝", title: "True Partnership", desc: "Your success is our success — we treat your brand like our own." },
+    { icon: "🎯", title: "Strategy First",    desc: "Every visual decision is backed by a clear creative strategy." },
+    { icon: "✨", title: "Pixel Perfect",     desc: "Obsessive attention to detail in every frame and every pixel." },
+    { icon: "🚀", title: "On-Time Delivery",  desc: "We respect your deadlines as much as you do." },
+    { icon: "🤝", title: "True Partnership",  desc: "Your success is our success — we treat your brand like our own." },
   ],
 };
 
@@ -198,33 +389,32 @@ export const ABOUT = {
 export const BROCHURE = {
   headline: "Get Our Full Services Brochure",
   description:
-    "Download our detailed brochure covering all services, packages, pricing tiers, and past work samples.",
+    "Download our detailed brochure covering all services, packages, and past work samples.",
   fileName: "Visual_Air_Media_Brochure_2025.pdf",
-  // 🔧 Replace this with your actual PDF hosted URL
-  fileUrl: "/brochure/Visual_Air_Media_Brochure_2025.pdf",
+  fileUrl:  "/brochure/Visual_Air_Media_Brochure_2025.pdf",
   buttonLabel: "Download Brochure (PDF)",
 };
 
-// ── EMAILJS CONFIG (Contact Form) ────────────────────────
-// 🔧 Replace these with your actual EmailJS credentials
+// ── EMAILJS CONFIG ────────────────────────────────────────
+// 🔧 Replace with your actual EmailJS credentials
 // Sign up free at: https://www.emailjs.com/
 export const EMAILJS_CONFIG = {
-  SERVICE_ID: "YOUR_SERVICE_ID",       // e.g. "service_abc123"
-  TEMPLATE_ID: "YOUR_TEMPLATE_ID",     // e.g. "template_xyz789"
-  PUBLIC_KEY: "YOUR_PUBLIC_KEY",       // e.g. "user_abc123xyz"
+  SERVICE_ID:  "YOUR_SERVICE_ID",
+  TEMPLATE_ID: "YOUR_TEMPLATE_ID",
+  PUBLIC_KEY:  "YOUR_PUBLIC_KEY",
 };
 
 // ── CONTACT SECTION ───────────────────────────────────────
 export const CONTACT = {
-  headline: "Let's Create Something",
+  headline:      "Let's Create Something",
   highlightWord: "Extraordinary",
-  subtext: "Got a project in mind? We'd love to hear from you.",
+  subtext:       "Got a project in mind? We'd love to hear from you.",
   formFields: {
-    namePlaceholder: "Your Full Name",
-    emailPlaceholder: "Your Work Email",
+    namePlaceholder:    "Your Full Name",
+    emailPlaceholder:   "Your Work Email",
     servicePlaceholder: "Service you need",
     messagePlaceholder: "Tell us about your project...",
-    submitLabel: "Send Message",
+    submitLabel:        "Send Message",
   },
   serviceOptions: [
     "Long Form Video Editing",
@@ -239,5 +429,5 @@ export const CONTACT = {
 // ── FOOTER ────────────────────────────────────────────────
 export const FOOTER = {
   copyright: "© 2025 Visual Air Media. All Rights Reserved.",
-  tagline: "Crafted with ❤️ in Jamshedpur, India",
+  tagline:   "Crafted with ❤️ in Bengaluru, India",
 };
